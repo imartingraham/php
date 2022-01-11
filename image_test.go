@@ -6,7 +6,7 @@ import (
 	_ "image/png"
 	"io/ioutil"
 
-	"github.com/hyperjiang/php"
+	"github.com/imartingraham/php"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

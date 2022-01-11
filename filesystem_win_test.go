@@ -1,3 +1,4 @@
+//go:build windows
 // +build windows
 
 package php_test
@@ -5,7 +6,7 @@ package php_test
 import (
 	"os"
 
-	"github.com/hyperjiang/php"
+	"github.com/imartingraham/php"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
@@ -147,7 +148,7 @@ var _ = Describe("Filesystem Functions", func() {
 		php.Touch(filename)
 		defer php.Unlink(filename)
 
-		var link = "C:\\hyperjiangphpfilesystemtest.link"
+		var link = "C:\\imartingrahamphpfilesystemtest.link"
 		php.Unlink(link)
 		Expect(php.IsLink(link)).To(BeFalse()) // file not exists
 

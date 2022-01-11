@@ -1,3 +1,4 @@
+//go:build aix || darwin || dragonfly || freebsd || (js && wasm) || linux || netbsd || openbsd || solaris
 // +build aix darwin dragonfly freebsd js,wasm linux netbsd openbsd solaris
 
 package php_test
@@ -5,7 +6,7 @@ package php_test
 import (
 	"os"
 
-	"github.com/hyperjiang/php"
+	"github.com/imartingraham/php"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
@@ -58,7 +59,7 @@ var _ = Describe("Filesystem Functions", func() {
 	})
 
 	It("Touch and Unlink", func() {
-		var filename = "/tmp/hyperjiangphpfilesystemtest.txt"
+		var filename = "/tmp/imartingrahamphpfilesystemtest.txt"
 
 		err := php.Touch(filename)
 		Expect(err).NotTo(HaveOccurred())
@@ -68,8 +69,8 @@ var _ = Describe("Filesystem Functions", func() {
 	})
 
 	Describe("Mkdir and Rmdir", func() {
-		var path = "/tmp/hyperjiangphpfilesystemtestdir"
-		var subPath = "/tmp/hyperjiangphpfilesystemtestdir/dir"
+		var path = "/tmp/imartingrahamphpfilesystemtestdir"
+		var subPath = "/tmp/imartingrahamphpfilesystemtestdir/dir"
 
 		It("no recursive", func() {
 			err := php.Mkdir(path, 0666, false)
@@ -93,7 +94,7 @@ var _ = Describe("Filesystem Functions", func() {
 	})
 
 	It("IsFile", func() {
-		var filename = "/tmp/hyperjiangphpfilesystemtest.txt"
+		var filename = "/tmp/imartingrahamphpfilesystemtest.txt"
 		php.Unlink(filename)
 		Expect(php.IsFile(filename)).To(BeFalse()) // file not exists
 
@@ -103,7 +104,7 @@ var _ = Describe("Filesystem Functions", func() {
 	})
 
 	It("IsDir", func() {
-		var pathname = "/tmp/hyperjiangphpfilesystemtestdir"
+		var pathname = "/tmp/imartingrahamphpfilesystemtestdir"
 		php.Rmdir(pathname)
 		Expect(php.IsDir(pathname)).To(BeFalse()) // dir not exists
 
@@ -113,7 +114,7 @@ var _ = Describe("Filesystem Functions", func() {
 	})
 
 	It("IsExecutable", func() {
-		var filename = "/tmp/hyperjiangphpfilesystemtest.exe"
+		var filename = "/tmp/imartingrahamphpfilesystemtest.exe"
 		php.Unlink(filename)
 		Expect(php.IsExecutable(filename)).To(BeFalse()) // file not exists
 
@@ -126,7 +127,7 @@ var _ = Describe("Filesystem Functions", func() {
 	})
 
 	It("IsReadable", func() {
-		var filename = "/tmp/hyperjiangphpfilesystemtest.txt"
+		var filename = "/tmp/imartingrahamphpfilesystemtest.txt"
 		php.Unlink(filename)
 		Expect(php.IsReadable(filename)).To(BeFalse()) // file not exists
 
@@ -139,7 +140,7 @@ var _ = Describe("Filesystem Functions", func() {
 	})
 
 	It("IsWritable", func() {
-		var filename = "/tmp/hyperjiangphpfilesystemtest.txt"
+		var filename = "/tmp/imartingrahamphpfilesystemtest.txt"
 		php.Unlink(filename)
 		Expect(php.IsWritable(filename)).To(BeFalse()) // file not exists
 
@@ -152,11 +153,11 @@ var _ = Describe("Filesystem Functions", func() {
 	})
 
 	It("Symlink and IsLink", func() {
-		var filename = "/tmp/hyperjiangphpfilesystemtest.txt"
+		var filename = "/tmp/imartingrahamphpfilesystemtest.txt"
 		php.Touch(filename)
 		defer php.Unlink(filename)
 
-		var link = "/tmp/hyperjiangphpfilesystemtest.link"
+		var link = "/tmp/imartingrahamphpfilesystemtest.link"
 		php.Unlink(link)
 		Expect(php.IsLink(link)).To(BeFalse()) // file not exists
 
@@ -192,11 +193,11 @@ var _ = Describe("Filesystem Functions", func() {
 	})
 
 	It("Link", func() {
-		var filename = "/tmp/hyperjiangphpfilesystemtest.txt"
+		var filename = "/tmp/imartingrahamphpfilesystemtest.txt"
 		php.Touch(filename)
 		defer php.Unlink(filename)
 
-		var link = "/tmp/hyperjiangphpfilesystemtest.link"
+		var link = "/tmp/imartingrahamphpfilesystemtest.link"
 		php.Unlink(link)
 
 		err := php.Link(filename, link)
@@ -205,8 +206,8 @@ var _ = Describe("Filesystem Functions", func() {
 	})
 
 	It("Copy", func() {
-		var src = "/tmp/hyperjiangphpfilesystemtest.src"
-		var dst = "/tmp/hyperjiangphpfilesystemtest.dst"
+		var src = "/tmp/imartingrahamphpfilesystemtest.src"
+		var dst = "/tmp/imartingrahamphpfilesystemtest.dst"
 		php.Unlink(src)
 		php.Unlink(dst)
 
@@ -216,7 +217,7 @@ var _ = Describe("Filesystem Functions", func() {
 		php.Touch(src)
 		defer php.Unlink(src)
 
-		err = php.Copy(src, "/tmp/nodir/hyperjiangphpfilesystemtest.dst")
+		err = php.Copy(src, "/tmp/nodir/imartingrahamphpfilesystemtest.dst")
 		Expect(err).To(HaveOccurred(), "Copy should fail because the directory of dst file does not exist")
 
 		err = php.Copy(src, dst)
@@ -226,7 +227,7 @@ var _ = Describe("Filesystem Functions", func() {
 	})
 
 	It("FileExists", func() {
-		var filename = "/tmp/hyperjiangphpfilesystemtest.txt"
+		var filename = "/tmp/imartingrahamphpfilesystemtest.txt"
 		php.Unlink(filename)
 		Expect(php.FileExists(filename)).To(BeFalse()) // file not exists
 
@@ -236,7 +237,7 @@ var _ = Describe("Filesystem Functions", func() {
 	})
 
 	It("FileSize", func() {
-		var filename = "/tmp/hyperjiangphpfilesystemtest.txt"
+		var filename = "/tmp/imartingrahamphpfilesystemtest.txt"
 		php.Unlink(filename)
 		_, err := php.FileSize(filename)
 		Expect(err).To(HaveOccurred())
@@ -250,10 +251,10 @@ var _ = Describe("Filesystem Functions", func() {
 	})
 
 	It("Rename", func() {
-		var oldname = "/tmp/hyperjiangphpfilesystemtest.old"
+		var oldname = "/tmp/imartingrahamphpfilesystemtest.old"
 		php.Touch(oldname)
 
-		var newname = "/tmp/hyperjiangphpfilesystemtest.new"
+		var newname = "/tmp/imartingrahamphpfilesystemtest.new"
 		php.Rename(oldname, newname)
 
 		Expect(php.FileExists(oldname)).To(BeFalse())
@@ -263,7 +264,7 @@ var _ = Describe("Filesystem Functions", func() {
 	})
 
 	It("FilePutContents and FileGetContents", func() {
-		var filename = "/tmp/hyperjiangphpfilesystemtest.txt"
+		var filename = "/tmp/imartingrahamphpfilesystemtest.txt"
 		php.Unlink(filename)
 
 		const msg = "Hello world!"

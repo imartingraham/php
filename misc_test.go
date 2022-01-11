@@ -1,7 +1,7 @@
 package php_test
 
 import (
-	"github.com/hyperjiang/php"
+	"github.com/imartingraham/php"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
