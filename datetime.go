@@ -214,6 +214,11 @@ func DateCreateFromFormat(f string, t string) (time.Time, error) {
 	return time.Parse(convertLayout(f), t)
 }
 
+// DateCreateFromFormatLocation parses a date/time string according to a specified format with location
+func DateCreateFromFormatLocation(f string, t string, loc *time.Location) (time.Time, error){
+	return time.ParseInLocation(convertLayout(f), t, loc)
+}
+
 // DateCreate parses a date/time string and return a time.Time.
 // Supported Date and Time Formats: https://www.php.net/manual/en/datetime.formats.php
 func DateCreate(str string) (time.Time, error) {
